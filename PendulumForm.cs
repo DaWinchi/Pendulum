@@ -59,18 +59,18 @@ namespace Pendulum
 
         private void painting()
         {
-            bmp = new Bitmap(WorldPic.Width, WorldPic.Height);
-            bmp_faz = new Bitmap(FazDiagram.Width, FazDiagram.Height);
+            bmp = new Bitmap(WorldPic.Width-param.otstup_x, WorldPic.Height-param.otstup_y);
+            bmp_faz = new Bitmap(FazDiagram.Width-param_faz.otstup_x, FazDiagram.Height-param_faz.otstup_y);
 
             Graphics g = Graphics.FromImage(bmp),
                 g_faz = Graphics.FromImage(bmp_faz);
-
+            
             SolidBrush brush_back = new SolidBrush(param.backgroundcolor);
             SolidBrush brush_back_faz = new SolidBrush(param_faz.backgroundcolor);
             SolidBrush brush_dot_faz=new SolidBrush(param_faz.pointcolor);
 
-            g.FillRectangle(brush_back, 0, 0, WorldPic.Width, WorldPic.Height);
-            g_faz.FillRectangle(brush_back_faz, 0, 0, FazDiagram.Width, FazDiagram.Height);
+            g.FillRectangle(brush_back, param.otstup_x, 0, WorldPic.Width, WorldPic.Height-param_faz.otstup_y);
+            g_faz.FillRectangle(brush_back_faz, param_faz.otstup_x, 0, FazDiagram.Width - param_faz.otstup_x, FazDiagram.Height - param_faz.otstup_y);
             //ручка для осей
             Pen osi = new Pen(param.osicolor, 3);
             osi.DashStyle = DashStyle.Solid;
@@ -81,8 +81,8 @@ namespace Pendulum
             g_faz.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-            double width = WorldPic.Width, height = WorldPic.Height,
-                width_faz=FazDiagram.Width, height_faz=FazDiagram.Height;
+            double width = WorldPic.Width-param.otstup_x, height = WorldPic.Height-param.otstup_y,
+                width_faz = FazDiagram.Width - param_faz.otstup_x, height_faz = FazDiagram.Height - param_faz.otstup_y;
 
             //рисую оси
             g.DrawLine(osi, (float)param.X(width, param.xmin), (float)param.Y(height, 0), (float)param.X(width, param.xmax), (float)param.Y(height, 0));
@@ -98,7 +98,7 @@ namespace Pendulum
                 }
             }
              
-            WorldPic.Image = bmp;
+            WorldPic.Image= bmp;
             FazDiagram.Image = bmp_faz;
             
         }
