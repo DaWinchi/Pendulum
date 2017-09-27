@@ -1,0 +1,18 @@
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\bin\Debug\Pendulum.exe.config
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\bin\Debug\Pendulum.exe
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\bin\Debug\Pendulum.pdb
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\obj\Debug\Pendulum.csprojResolveAssemblyReference.cache
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\obj\Debug\Pendulum.Properties.Resources.resources
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\obj\Debug\Pendulum.csproj.GenerateResource.Cache
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\obj\Debug\Pendulum.exe
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\obj\Debug\Pendulum.pdb
+C:\Users\14PAN\Documents\Projects\Modelling\Pendulum\obj\Debug\Pendulum.PendulumForm.resources
+E:\Учеба\4 курс\Моделирование систем\Pendulum\bin\Debug\Pendulum.exe.config
+E:\Учеба\4 курс\Моделирование систем\Pendulum\obj\Debug\Pendulum.exe
+E:\Учеба\4 курс\Моделирование систем\Pendulum\obj\Debug\Pendulum.pdb
+E:\Учеба\4 курс\Моделирование систем\Pendulum\bin\Debug\Pendulum.exe
+E:\Учеба\4 курс\Моделирование систем\Pendulum\bin\Debug\Pendulum.pdb
+E:\Учеба\4 курс\Моделирование систем\Pendulum\obj\Debug\Pendulum.csprojResolveAssemblyReference.cache
+E:\Учеба\4 курс\Моделирование систем\Pendulum\obj\Debug\Pendulum.PendulumForm.resources
+E:\Учеба\4 курс\Моделирование систем\Pendulum\obj\Debug\Pendulum.Properties.Resources.resources
+E:\Учеба\4 курс\Моделирование систем\Pendulum\obj\Debug\Pendulum.csproj.GenerateResource.Cache
