@@ -12,15 +12,15 @@ namespace Painting
         public double xmin, xmax, ymin, ymax, stepx, stepy;
         public int N;
         public Color backgroundcolor, graphcolor, osicolor, setkacolor, pointcolor;
-        public int otstup_x=0, otstup_y=0;
+        
         public double X(double width, double x)
         {
-            return width / (xmax - xmin) * (x - xmin)+otstup_x;
+            return width / (xmax - xmin) * (x - xmin);
         }
 
         public double Y(double height, double y)
         {
-            return -height / (ymax - ymin) * (y - ymax)-otstup_y;
+            return -height / (ymax - ymin) * (y - ymax);
         }
     }
 }

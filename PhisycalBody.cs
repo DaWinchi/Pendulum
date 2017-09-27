@@ -9,7 +9,7 @@ namespace Pendulum
 {
     class PhisycalBody
     {
-        public double m, y_ris, x_ris, x, y, dx, dy, ddx, ddy;
+        public double m, y_ris, x_ris, x, y, dx, dy;
         public double width, height;
         
 

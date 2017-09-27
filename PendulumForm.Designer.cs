@@ -44,6 +44,9 @@
             this.FazDiagram = new System.Windows.Forms.PictureBox();
             this.SpeedBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.MuBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.trenie = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.WorldPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FazDiagram)).BeginInit();
             this.SuspendLayout();
@@ -168,11 +171,40 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "Начальная скорость (со знаком)";
             // 
+            // MuBox
+            // 
+            this.MuBox.Location = new System.Drawing.Point(206, 533);
+            this.MuBox.Name = "MuBox";
+            this.MuBox.Size = new System.Drawing.Size(68, 20);
+            this.MuBox.TabIndex = 14;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(85, 536);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(115, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Коэффициент трения";
+            // 
+            // trenie
+            // 
+            this.trenie.AutoSize = true;
+            this.trenie.Location = new System.Drawing.Point(207, 587);
+            this.trenie.Name = "trenie";
+            this.trenie.Size = new System.Drawing.Size(118, 17);
+            this.trenie.TabIndex = 16;
+            this.trenie.Text = "Активация трения";
+            this.trenie.UseVisualStyleBackColor = true;
+            // 
             // PendulumForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1173, 722);
+            this.Controls.Add(this.trenie);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.MuBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.SpeedBox);
             this.Controls.Add(this.FazDiagram);
@@ -213,6 +245,9 @@
         private System.Windows.Forms.PictureBox FazDiagram;
         private System.Windows.Forms.TextBox SpeedBox;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox MuBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox trenie;
     }
 }
 
