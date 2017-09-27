@@ -34,7 +34,8 @@ namespace Pendulum
 
             param_faz.backgroundcolor = Color.WhiteSmoke;
             param_faz.osicolor = Color.Black;
-            param_faz.graphcolor = Color.Red;
+            param_faz.graphcolor = Color.Blue;
+            param_faz.pointcolor = Color.Red;
             param_faz.xmax = 10;
             param_faz.xmin = -10;
             param_faz.ymax = 10;
@@ -50,7 +51,8 @@ namespace Pendulum
         Parametrs param = new Parametrs();
         Parametrs param_faz = new Parametrs();
         PhisycalBody body = new PhisycalBody();
-        Bitmap bmp;
+        List<Dots> faz_line = new List<Dots>();
+        Bitmap bmp, bmp_faz;
         Timer timer = new Timer();
         double K, x0, l;
 
@@ -58,48 +60,47 @@ namespace Pendulum
         private void painting()
         {
             bmp = new Bitmap(WorldPic.Width, WorldPic.Height);
-            Graphics g = Graphics.FromImage(bmp); ;
+            bmp_faz = new Bitmap(FazDiagram.Width, FazDiagram.Height);
+
+            Graphics g = Graphics.FromImage(bmp),
+                g_faz = Graphics.FromImage(bmp_faz);
 
             SolidBrush brush_back = new SolidBrush(param.backgroundcolor);
+            SolidBrush brush_back_faz = new SolidBrush(param_faz.backgroundcolor);
+            SolidBrush brush_dot_faz=new SolidBrush(param_faz.pointcolor);
 
             g.FillRectangle(brush_back, 0, 0, WorldPic.Width, WorldPic.Height);
+            g_faz.FillRectangle(brush_back_faz, 0, 0, FazDiagram.Width, FazDiagram.Height);
             //ручка для осей
             Pen osi = new Pen(param.osicolor, 3);
             osi.DashStyle = DashStyle.Solid;
 
-            //ручка для сетки
-            Pen setka = new Pen(param.setkacolor, 1);
-            setka.DashStyle = DashStyle.DashDotDot;
-
-            //ручка для сетки
-            Pen graph_pen = new Pen(param.graphcolor, 3);
-            setka.DashStyle = DashStyle.Solid;
-
-            //ручка для сетки
-            Pen bifur_pen = new Pen(param.graphcolor, 1);
-            setka.DashStyle = DashStyle.Solid;
-
-            //ручка для сетки
-            SolidBrush solidline = new SolidBrush(param.pointcolor);
+            Pen graph_pen=new Pen(param_faz.graphcolor, 2);
 
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g_faz.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-            double width = WorldPic.Width, height = WorldPic.Height;
+            double width = WorldPic.Width, height = WorldPic.Height,
+                width_faz=FazDiagram.Width, height_faz=FazDiagram.Height;
 
             //рисую оси
             g.DrawLine(osi, (float)param.X(width, param.xmin), (float)param.Y(height, 0), (float)param.X(width, param.xmax), (float)param.Y(height, 0));
-
             g.DrawEllipse(osi, (float)param.X(width, body.x), (float)param.Y(height, body.y), 20, 20);
 
-
-
-
-
-
-
+            g_faz.FillEllipse(brush_dot_faz, (float)param_faz.X(width_faz, body.x), (float)param_faz.Y(height_faz, body.dx), 6, 6);
+            if(faz_line.Count>1)
+            {
+                for (int i=0; i<faz_line.Count-1; i++)
+                {
+                    g_faz.DrawLine(graph_pen, (float)param_faz.X(width_faz, faz_line[i].x), (float)param_faz.Y(height_faz, faz_line[i].y), 
+                        (float)param_faz.X(width_faz, faz_line[i+1].x), (float)param_faz.Y(height_faz, faz_line[i+1].y));
+                }
+            }
+             
             WorldPic.Image = bmp;
-            bmp.Save(@"picture.png", System.Drawing.Imaging.ImageFormat.Png);
+            FazDiagram.Image = bmp_faz;
+            
         }
 
         void RungeKutt(double dt)  //метод Рунге-Кутты
@@ -130,11 +131,18 @@ namespace Pendulum
             painting();
             if (body.x < param.xmin) {param.xmin = body.x; param.xmax=-body.x;}
             if (body.x > param.xmax) { param.xmax = body.x; param.xmin = -body.x; }
+            if (body.x > param_faz.xmax) { param_faz.xmax = body.x; param_faz.xmin = -body.x; }
+            if (body.x < param_faz.xmin) { param_faz.xmin = body.x; param_faz.xmax = -body.x; }
+            if (body.dx < param_faz.ymin) { param_faz.ymin = body.dx; param_faz.ymax = -body.dx; }
+            if (body.dx > param_faz.ymax) { param_faz.ymax = body.dx; param_faz.ymin = -body.dx; }
             Speed.Text = body.dx.ToString("F4");
+            Dots dot = new Dots(body.x, body.dx);
+            faz_line.Add(dot);
         }
 
         private void Run_Click(object sender, EventArgs e)
         {
+            faz_line.Clear();
             body.m = double.Parse(mBox.Text);
             K = double.Parse(Kbox.Text);
             body.x = double.Parse(X0Box.Text);
