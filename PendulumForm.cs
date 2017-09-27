@@ -31,13 +31,28 @@ namespace Pendulum
             param.graphcolor = Color.Red;
             param.pointcolor = Color.Brown;
 
+
+            param_faz.backgroundcolor = Color.WhiteSmoke;
+            param_faz.osicolor = Color.Black;
+            param_faz.graphcolor = Color.Red;
+            param_faz.xmax = 10;
+            param_faz.xmin = -10;
+            param_faz.ymax = 10;
+            param_faz.ymin = -10;
+
+            Kbox.Text = "0,5";
+            LBox.Text = "10";
+            X0Box.Text = "50";
+            mBox.Text = "10";
             painting();
         }
 
         Parametrs param = new Parametrs();
+        Parametrs param_faz = new Parametrs();
         PhisycalBody body = new PhisycalBody();
         Bitmap bmp;
-        double K, m, x0, l;
+        Timer timer = new Timer();
+        double K, x0, l;
 
 
         private void painting()
@@ -75,6 +90,7 @@ namespace Pendulum
             //рисую оси
             g.DrawLine(osi, (float)param.X(width, param.xmin), (float)param.Y(height, 0), (float)param.X(width, param.xmax), (float)param.Y(height, 0));
 
+            g.DrawEllipse(osi, (float)param.X(width, body.x), (float)param.Y(height, body.y), 20, 20);
 
 
 
@@ -105,21 +121,26 @@ namespace Pendulum
 
         double ddx(double x, double dx)
         {
-            return K * (Math.Sqrt(l * l + x * x) - l) * x / (Math.Sqrt(l * l + x * x) * m);
+            return -K * (Math.Sqrt(l * l + x * x) - l) * x / (Math.Sqrt(l * l + x * x) * body.m);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            RungeKutt(0.1);
+            painting();
+            if (body.x < param.xmin) {param.xmin = body.x; param.xmax=-body.x;}
+            if (body.x > param.xmax) { param.xmax = body.x; param.xmin = -body.x; }
+            Speed.Text = body.dx.ToString("F4");
         }
 
         private void Run_Click(object sender, EventArgs e)
         {
-            m = double.Parse(mBox.Text);
+            body.m = double.Parse(mBox.Text);
             K = double.Parse(Kbox.Text);
-            x0 = double.Parse(X0Box.Text);
+            body.x = double.Parse(X0Box.Text);
             l = double.Parse(LBox.Text);
-
+            painting();
+            timer1.Start();
         }
     }
 }

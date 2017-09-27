@@ -29,7 +29,7 @@ namespace Pendulum
             width = 10;
             height = 1;
             y_ris = 0.5;
-            x = 0;
+            x = -50;
             y = 0;
             x_ris = x - width / 2;
         }
