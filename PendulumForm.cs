@@ -80,7 +80,7 @@ namespace Pendulum
         double K, l, mu, step_time;
 
         int counter_ta = 0;
-        double counter_time;
+        double counter_time=0, buffer_elem;
 
 
         private void painting()
@@ -236,8 +236,7 @@ namespace Pendulum
             g_ta.DrawLine(osi, (float)param_ta.X(width_ta, param_ta.xmin), (float)param_ta.Y(height_ta, 0),
                 (float)param_ta.X(width_ta, param_ta.xmax), (float)param_ta.Y(height_ta, 0));
 
-            g_ta.DrawLine(osi, (float)param_ta.X(width_ta, 0), (float)param_ta.Y(height_ta, param_ta.ymin),
-                (float)param_ta.X(width_ta, 0), (float)param_ta.Y(height_ta, param_ta.ymax)); 
+          
 
             //рисую сетку
 
@@ -266,8 +265,29 @@ namespace Pendulum
                     (float)param_ta.X(width_ta, param_ta.xmax), (float)param_ta.Y(height_ta, i));
             }
 
+            //подписываю
+            //вправо
+            for (double i = 0; i <= param_ta.xmax; i += param_ta.stepx)
+            {
+                str = i.ToString("F2");
+                g_ta.DrawString(str, font, brush_text, (float)param_ta.X(width_ta, i), (float)param_ta.Y(height_ta, param_ta.ymin) - 16);
+            }
 
+            //вверх
+            for (double i = param_ta.stepy; i <= param_ta.ymax; i += param_ta.stepy)
+            {
+                str = i.ToString("F2");
+                g_ta.DrawString(str, font, brush_text, (float)param_ta.X(width_ta, param_ta.xmin), (float)param_ta.Y(height_ta, i) + 2);
+            }
 
+            if(TA_line.Count>1)
+            {
+                for (int i = 1; i < TA_line.Count; i++)
+                {
+                    g_ta.DrawLine(graph_pen, (float)param_ta.X(width_ta, TA_line[i-1].x), (float)param_ta.Y(height_ta, TA_line[i-1].y),
+                        (float)param_ta.X(width_ta, TA_line[i].x), (float)param_ta.Y(height_ta, TA_line[i].y));
+                }
+            }
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             g_faz.FillEllipse(brush_dot_faz, (float)param_faz.X(width_faz, body.x), (float)param_faz.Y(height_faz, body.dx), 6, 6);
@@ -329,36 +349,60 @@ namespace Pendulum
             param_faz.stepx = (double)param_faz.xmax / 5;
             param_faz.stepy = (double)param_faz.ymax / 5;
 
-            Speed.Text = body.dx.ToString("F4");
+
+           
+
+            SpeedStream.Text = body.dx.ToString("F3")+" м/c";
 
 
-            if(counter_time>0)
+            if(counter_ta>0)
             {
                 counter_time+=step_time;
             }
 
-
-            if((faz_line.Last().y*body.dy)<0)
+            if (faz_line.Count > 0)
             {
-                if (counter_ta < 2)
-                {                   
-                    counter_ta++;
-                }
-                else
+                if (Math.Abs(faz_line.Last().x - body.x) < 0.001) { timer1.Stop(); MessageBox.Show("Расчёт остановлен, т.к. кооридната не изменяется.", "Уведомление"); }
+                if ((buffer_elem * body.dx) < 0)
                 {
-                    counter_ta = 1;
-                    Dots dot_buf = new Dots(counter_time, Math.Abs(body.x));
-                    counter_time = 0;
-                    TA_line.Add(dot_buf);
+                    if (counter_ta < 2)
+                    {
+                        counter_ta++;
+                        
+                    }
+                    else
+                    {
+                        counter_ta = 1;
+                        Dots dot_buf = new Dots(Math.Abs(body.x), counter_time); 
+                        counter_time = 0;
+                        TA_line.Add(dot_buf);
+
+                        if (TA_line.Count == 1)
+                        {
+                            param_ta.ymax = dot_buf.y;
+                            param_ta.xmax = dot_buf.x;
+                        }
+                        if (param_ta.ymax < dot_buf.y) param_ta.ymax = dot_buf.y;
+                        if (param_ta.xmax < dot_buf.x) param_ta.xmax = dot_buf.x;
+                        param_ta.ymin = -param_ta.ymax / 14;
+                        param_ta.xmin = -param_ta.xmax / 100;
+                        param_ta.stepx = (double)param_ta.xmax / 5;
+                        param_ta.stepy = (double)param_ta.ymax / 5;
+                    }
                 }
             }
 
-            Dots dot = new Dots(body.x, body.dx);
-            faz_line.Add(dot);
+
 
             
 
+            Dots dot = new Dots(body.x, body.dx);
+            faz_line.Add(dot);
+            buffer_elem = dot.y;
 
+            
+
+            period_stream.Text = counter_time.ToString("F3")+ " c";
             painting();
         }
 
@@ -380,7 +424,17 @@ namespace Pendulum
             param_faz.stepx = (double)param_faz.xmax / 5;
             param_faz.stepy = (double)param_faz.ymax / 5;
 
-            step_time = 0.05;
+
+            //
+            param_ta.xmax = 10;
+            param_ta.xmin = -1;
+            param_ta.ymax = 10;
+            param_ta.ymin = -1;
+            param_ta.stepx = (double)param_faz.xmax / 5;
+            param_ta.stepy = (double)param_faz.ymax / 5;
+
+            step_time = 0.01;
+            TA_line.Clear();
             faz_line.Clear();
             body.m = double.Parse(mBox.Text);
             K = double.Parse(Kbox.Text);
