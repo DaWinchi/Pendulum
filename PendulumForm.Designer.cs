@@ -47,6 +47,7 @@
             this.MuBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.trenie = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.WorldPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FazDiagram)).BeginInit();
             this.SuspendLayout();
@@ -131,11 +132,11 @@
             // 
             // Run
             // 
-            this.Run.Location = new System.Drawing.Point(1039, 676);
+            this.Run.Location = new System.Drawing.Point(1039, 636);
             this.Run.Name = "Run";
             this.Run.Size = new System.Drawing.Size(122, 34);
             this.Run.TabIndex = 9;
-            this.Run.Text = "Пуск/Пауза";
+            this.Run.Text = "Запуск";
             this.Run.UseVisualStyleBackColor = true;
             this.Run.Click += new System.EventHandler(this.Run_Click);
             // 
@@ -197,11 +198,22 @@
             this.trenie.Text = "Активация трения";
             this.trenie.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1039, 676);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 34);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Стоп";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // PendulumForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1173, 722);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.trenie);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.MuBox);
@@ -248,6 +260,7 @@
         private System.Windows.Forms.TextBox MuBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox trenie;
+        private System.Windows.Forms.Button button1;
     }
 }
 

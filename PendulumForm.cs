@@ -26,7 +26,7 @@ namespace Pendulum
             param.stepx = (double)param.xmax / 5;
             param.stepy = (double)param.ymax / 5;
             param.osicolor = Color.Black;
-            param.setkacolor = Color.Black;
+            param.bodycolor = Color.Red;
             param.backgroundcolor = Color.LightBlue;
             param.graphcolor = Color.Red;
             param.pointcolor = Color.Brown;
@@ -70,6 +70,7 @@ namespace Pendulum
             SolidBrush brush_back = new SolidBrush(param.backgroundcolor);
             SolidBrush brush_back_faz = new SolidBrush(param_faz.backgroundcolor);
             SolidBrush brush_dot_faz = new SolidBrush(param_faz.pointcolor);
+            SolidBrush brush_body = new SolidBrush(param.bodycolor);
 
             g.FillRectangle(brush_back, 0, 0, WorldPic.Width, WorldPic.Height);
             g_faz.FillRectangle(brush_back_faz, 0, 0, FazDiagram.Width, FazDiagram.Height);
@@ -78,6 +79,7 @@ namespace Pendulum
             osi.DashStyle = DashStyle.Solid;
 
             Pen graph_pen = new Pen(param_faz.graphcolor, 2);
+            Pen body_pen = new Pen(param.bodycolor, 3);
 
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g_faz.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -88,7 +90,8 @@ namespace Pendulum
 
             //рисую оси
             g.DrawLine(osi, (float)param.X(width, param.xmin), (float)param.Y(height, 0), (float)param.X(width, param.xmax), (float)param.Y(height, 0));
-            g.DrawEllipse(osi, (float)param.X(width, body.x), (float)param.Y(height, body.y), 20, 20);
+            g.FillRectangle(brush_body, (float)param.X(width, (body.x)) - (float)body.width / 2, 
+                (float)param.Y(height, body.y) -(float)body.height / 2, (float)body.width, (float)body.height);
 
             g_faz.FillEllipse(brush_dot_faz, (float)param_faz.X(width_faz, body.x), (float)param_faz.Y(height_faz, body.dx), 6, 6);
             if (faz_line.Count > 1)
@@ -136,8 +139,8 @@ namespace Pendulum
         private void timer1_Tick(object sender, EventArgs e)
         {
             RungeKutt(0.05);
-            if (body.x < param.xmin) { param.xmin = body.x; param.xmax = -body.x; }
-            if (body.x > param.xmax) { param.xmax = body.x; param.xmin = -body.x; }
+            if (body.x < param.xmin) { param.xmin = body.x + body.x / 8; param.xmax = -body.x - body.x / 8; }
+            if (body.x > param.xmax) { param.xmax = body.x + body.x / 8; param.xmin = -body.x - body.x / 8; }
             if (body.x > param_faz.xmax) { param_faz.xmax = body.x + body.x / 8; param_faz.xmin = -body.x - body.x / 8; }
             if (body.x < param_faz.xmin) { param_faz.xmin = body.x + body.x / 8; param_faz.xmax = -body.x - body.x / 8; }
             if (body.dx < param_faz.ymin) { param_faz.ymin = body.dx + body.dx / 8; param_faz.ymax = -body.dx - body.dx / 8; }
@@ -157,8 +160,15 @@ namespace Pendulum
             l = double.Parse(LBox.Text);
             mu = double.Parse(MuBox.Text);
             body.dx = double.Parse(SpeedBox.Text);
+            body.height = 20;
+            body.width = 40;
             painting();
             timer1.Start();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
         }
     }
 }

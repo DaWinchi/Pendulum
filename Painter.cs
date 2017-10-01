@@ -11,7 +11,7 @@ namespace Painting
     {
         public double xmin, xmax, ymin, ymax, stepx, stepy;
         public int N;
-        public Color backgroundcolor, graphcolor, osicolor, setkacolor, pointcolor;
+        public Color backgroundcolor, graphcolor, osicolor, bodycolor, pointcolor;
         
         public double X(double width, double x)
         {
