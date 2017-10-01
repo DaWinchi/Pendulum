@@ -48,8 +48,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.trenie = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.TAPic = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.WorldPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FazDiagram)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TAPic)).BeginInit();
             this.SuspendLayout();
             // 
             // WorldPic
@@ -63,7 +65,7 @@
             // 
             // Kbox
             // 
-            this.Kbox.Location = new System.Drawing.Point(206, 403);
+            this.Kbox.Location = new System.Drawing.Point(1081, 414);
             this.Kbox.Name = "Kbox";
             this.Kbox.Size = new System.Drawing.Size(68, 20);
             this.Kbox.TabIndex = 1;
@@ -71,7 +73,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(136, 403);
+            this.label1.Location = new System.Drawing.Point(1011, 414);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 2;
@@ -79,7 +81,7 @@
             // 
             // LBox
             // 
-            this.LBox.Location = new System.Drawing.Point(206, 429);
+            this.LBox.Location = new System.Drawing.Point(1081, 440);
             this.LBox.Name = "LBox";
             this.LBox.Size = new System.Drawing.Size(68, 20);
             this.LBox.TabIndex = 3;
@@ -87,7 +89,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(57, 429);
+            this.label2.Location = new System.Drawing.Point(932, 440);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(143, 13);
             this.label2.TabIndex = 4;
@@ -95,7 +97,7 @@
             // 
             // X0Box
             // 
-            this.X0Box.Location = new System.Drawing.Point(206, 455);
+            this.X0Box.Location = new System.Drawing.Point(1081, 466);
             this.X0Box.Name = "X0Box";
             this.X0Box.Size = new System.Drawing.Size(68, 20);
             this.X0Box.TabIndex = 5;
@@ -103,7 +105,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(79, 455);
+            this.label3.Location = new System.Drawing.Point(954, 466);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 13);
             this.label3.TabIndex = 6;
@@ -111,7 +113,7 @@
             // 
             // mBox
             // 
-            this.mBox.Location = new System.Drawing.Point(206, 481);
+            this.mBox.Location = new System.Drawing.Point(1081, 492);
             this.mBox.Name = "mBox";
             this.mBox.Size = new System.Drawing.Size(68, 20);
             this.mBox.TabIndex = 7;
@@ -119,7 +121,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(160, 481);
+            this.label4.Location = new System.Drawing.Point(1035, 492);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 8;
@@ -142,7 +144,7 @@
             // 
             // Speed
             // 
-            this.Speed.Location = new System.Drawing.Point(728, 404);
+            this.Speed.Location = new System.Drawing.Point(709, 394);
             this.Speed.Name = "Speed";
             this.Speed.Size = new System.Drawing.Size(100, 20);
             this.Speed.TabIndex = 10;
@@ -158,7 +160,7 @@
             // 
             // SpeedBox
             // 
-            this.SpeedBox.Location = new System.Drawing.Point(206, 507);
+            this.SpeedBox.Location = new System.Drawing.Point(1081, 518);
             this.SpeedBox.Name = "SpeedBox";
             this.SpeedBox.Size = new System.Drawing.Size(68, 20);
             this.SpeedBox.TabIndex = 12;
@@ -166,7 +168,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 507);
+            this.label5.Location = new System.Drawing.Point(901, 518);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(174, 13);
             this.label5.TabIndex = 13;
@@ -174,7 +176,7 @@
             // 
             // MuBox
             // 
-            this.MuBox.Location = new System.Drawing.Point(206, 533);
+            this.MuBox.Location = new System.Drawing.Point(1081, 544);
             this.MuBox.Name = "MuBox";
             this.MuBox.Size = new System.Drawing.Size(68, 20);
             this.MuBox.TabIndex = 14;
@@ -182,7 +184,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(85, 536);
+            this.label6.Location = new System.Drawing.Point(960, 547);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(115, 13);
             this.label6.TabIndex = 15;
@@ -191,7 +193,7 @@
             // trenie
             // 
             this.trenie.AutoSize = true;
-            this.trenie.Location = new System.Drawing.Point(207, 587);
+            this.trenie.Location = new System.Drawing.Point(1031, 570);
             this.trenie.Name = "trenie";
             this.trenie.Size = new System.Drawing.Size(118, 17);
             this.trenie.TabIndex = 16;
@@ -208,11 +210,21 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // TAPic
+            // 
+            this.TAPic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.TAPic.Location = new System.Drawing.Point(12, 394);
+            this.TAPic.Name = "TAPic";
+            this.TAPic.Size = new System.Drawing.Size(529, 316);
+            this.TAPic.TabIndex = 18;
+            this.TAPic.TabStop = false;
+            // 
             // PendulumForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1173, 722);
+            this.Controls.Add(this.TAPic);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.trenie);
             this.Controls.Add(this.label6);
@@ -235,6 +247,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.WorldPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FazDiagram)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TAPic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,6 +274,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox trenie;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox TAPic;
     }
 }
 
