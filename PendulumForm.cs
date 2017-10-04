@@ -65,6 +65,7 @@ namespace Pendulum
             mBox.Text = "10";
             SpeedBox.Text = "25";
             MuBox.Text = "2";
+            timeBox.Text = "0,01";
             painting();
         }
 
@@ -290,7 +291,7 @@ namespace Pendulum
             }
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            g_faz.FillEllipse(brush_dot_faz, (float)param_faz.X(width_faz, body.x), (float)param_faz.Y(height_faz, body.dx), 6, 6);
+            
             if (faz_line.Count > 1)
             {
                 for (int i = 0; i < faz_line.Count - 1; i++)
@@ -299,6 +300,7 @@ namespace Pendulum
                         (float)param_faz.X(width_faz, faz_line[i + 1].x), (float)param_faz.Y(height_faz, faz_line[i + 1].y));
                 }
             }
+            g_faz.FillEllipse(brush_dot_faz, (float)param_faz.X(width_faz, body.x)-3, (float)param_faz.Y(height_faz, body.dx)-3, 6, 6);
 
 
             WorldPic.Image = bmp;
@@ -362,7 +364,7 @@ namespace Pendulum
 
             if (faz_line.Count > 0)
             {
-                if (Math.Abs(faz_line.Last().x - body.x) < 0.001) { timer1.Stop(); MessageBox.Show("Расчёт остановлен, т.к. кооридната не изменяется.", "Уведомление"); }
+                //if (Math.Abs(faz_line.Last().x - body.x) < 0.001) { timer1.Stop(); MessageBox.Show("Расчёт остановлен, т.к. кооридната не изменяется.", "Уведомление"); }
                 if ((buffer_elem * body.dx) < 0)
                 {
                     if (counter_ta < 2)
@@ -382,7 +384,7 @@ namespace Pendulum
                             param_ta.ymax = dot_buf.y;
                             param_ta.xmax = dot_buf.x;
                         }
-                        if (param_ta.ymax < dot_buf.y) param_ta.ymax = dot_buf.y;
+                        if (param_ta.ymax < dot_buf.y) param_ta.ymax = dot_buf.y+dot_buf.y/8;
                         if (param_ta.xmax < dot_buf.x) param_ta.xmax = dot_buf.x;
                         param_ta.ymin = -param_ta.ymax / 14;
                         param_ta.xmin = -param_ta.xmax / 100;
@@ -433,7 +435,7 @@ namespace Pendulum
             param_ta.stepx = (double)param_faz.xmax / 5;
             param_ta.stepy = (double)param_faz.ymax / 5;
 
-            step_time = 0.01;
+            step_time = double.Parse(timeBox.Text);
             TA_line.Clear();
             faz_line.Clear();
             body.m = double.Parse(mBox.Text);
